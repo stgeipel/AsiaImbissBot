@@ -40,7 +40,7 @@ bot.on('message', async msg => {
 
         if (msg.channel.type == "text" && author.id != bot.user.id && cont.startsWith(config.prefix)) {
            
-            var invoke = cont.split(' ')[0].substr(config.prefix.length),
+            var invoke = cont.split(' ')[0].substr(config.prefix.length).toLowerCase(),
                 args = cont.split(' ').slice(1)
 
            // if (args.length == 0) Embeds.error(msg, 'Es wurde keine Argumente zu diesem Befehl angegeben')
