@@ -18,5 +18,6 @@ module.exports.run = async (bot, msg, args) => {
 }
 
 module.exports.help = {
-    name: "admin"
+    name: "admin",
+    description: "Fügt einen Benutzer zu den Administratoren hinzu | admin @Benutzer "
 }

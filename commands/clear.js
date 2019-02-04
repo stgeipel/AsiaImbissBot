@@ -11,5 +11,6 @@ module.exports.run = async (bot, message, args) => {
 }
 
 module.exports.help = {
-  name: "clear"
+  name: "clear",
+  description:"Bulkdelete der letzten Einträge die nicht älter sind als 14 Tage"
 }

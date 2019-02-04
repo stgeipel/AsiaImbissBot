@@ -4,8 +4,9 @@ const Embeds = require('./embed')
 const gMemUpdate = require('./events/guildMemberUpdate')
 
 const config = JSON.parse(fs.readFileSync('config.json', 'utf8'))
-const bot = new Discord.Client();
+var bot = new Discord.Client();
 bot.commands = new Discord.Collection();
+
 
 fs.readdir('./commands', (err, files) => {
 
@@ -42,7 +43,7 @@ bot.on('message', async msg => {
             var invoke = cont.split(' ')[0].substr(config.prefix.length),
                 args = cont.split(' ').slice(1)
 
-            if (args.length == 0) Embeds.error(msg, 'Es wurde keine Argumente zu diesem Befehl angegeben')
+           // if (args.length == 0) Embeds.error(msg, 'Es wurde keine Argumente zu diesem Befehl angegeben')
             args = args.filter(x => x !== '');
             let cmdfile = bot.commands.get(invoke);
             if (cmdfile) cmdfile.run(bot, msg, args);
@@ -54,7 +55,10 @@ bot.on('message', async msg => {
 
 
 bot.on('guildMemberUpdate', (mold, mnew) => {
-    gMemUpdate.changeUsername(mold, mnew);
+    gMemUpdate.checkRolesAtUser(mold, mnew);
 })
 
 bot.login(config.token);
+
+
+module.exports.bot = bot;

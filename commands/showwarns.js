@@ -25,5 +25,6 @@ module.exports.run = async (bot, message, args) => {
 }
 
 module.exports.help = {
-  name: "showwarns"
+  name: "showwarns",
+  description: "Zeigt die hinterlegten Warnungen des Benutzers | showwarns @Benutzer"
 }
