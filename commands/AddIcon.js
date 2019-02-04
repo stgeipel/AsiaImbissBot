@@ -32,6 +32,6 @@ module.exports.run = async (bot, msg, args) => {
 }
 
 module.exports.help = {
-    name: "iconrole",
+    name: "AddIcon",
     description:"Fügt ein Icon zu einer Rolle hinzu. | iconrole @Serverrolle Icon"
 }
