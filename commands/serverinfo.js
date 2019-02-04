@@ -22,5 +22,7 @@ module.exports.run = async (bot, message, args) => {
 }
 
 module.exports.help = {
-  name:"serverinfo"
+  name:"serverinfo",
+  description:"Stell Informatoinen zu diesem Server dar"
+
 }
