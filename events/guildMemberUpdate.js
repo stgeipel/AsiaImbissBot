@@ -17,13 +17,37 @@ module.exports = {
         //         mnew.setNickname(mnew.displayName.substr(roles[role.id].length + 1))
         // }
         // else if(mold.user.username != mnew.user.username){
-            
+
         // }
 
-        mnew.roles.array.forEach(e => {
-            if(e.id in roles) mnew.setNickname(`${roles[role.id]} ${mnew.displayName}`)
+        var rolesRemove = arr_diff(mold.roles.array(), mnew.roles.array())
+        var rolesAdd = arr_diff(mnew.roles.array(), mold.roles.array())
 
-        });
-    }
+        rolesAdd.forEach(ra => {
+            if (ra.id in roles && !mnew.displayName.includes(roles[ra.id])) {
+                mnew.setNickname(`${roles[ra.id]} ${mnew.displayName}`)
+            }
+        })
+
+        rolesRemove.forEach(rr => {
+
+            if (rr.id in roles && mnew.displayName.includes(roles[rr.id])) {
+                mnew.setNickname(mnew.displayName.replace(roles[rr.id],''))
+            }
+        })
+       
+    },
+
+
+
 }
+function arr_diff(a1, a2) {
 
+    diff = [];
+
+    a1.forEach(a => {
+        if (a2.indexOf(a) == -1) diff.push(a)
+    });
+
+    return diff;
+};
