@@ -60,3 +60,4 @@ bot.on("guildMemberUpdate", (mold, mnew) => {
 bot.login(config.token);
 
 module.exports.bot = bot;
+
