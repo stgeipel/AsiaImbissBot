@@ -63,4 +63,5 @@ module.exports.bot = bot;
 
 function test() {
   console.log("test");
+  console.log("test");
 }
