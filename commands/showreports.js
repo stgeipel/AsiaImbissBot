@@ -1,16 +1,21 @@
 const Discord = require("discord.js");
 const fs = require("fs");
 const ms = require("ms");
-let warns = JSON.parse(fs.readFileSync("./configs/warnings.json", "utf8"));
+const Report = require("../models/mreport.js")
 
 module.exports.run = async (bot, message, args) => {
 
   if (!message.member.hasPermission("MANAGE_MESSAGES")) return message.reply("You can't do that.");
   let wUser = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0])
   if (!wUser) return message.reply("Couldn't find them yo");
-  if (!warns[wUser.id]) warns[wUser.id] = {
-    warns: []
-  };
+  
+  Report.find({userId: wUser.user.id}, function(err, reports){
+    if(reports.length > 0){
+      reports.forEach(r => {
+        
+      })
+    }
+  })
   
   if (warns[wUser.id].warns.length > 0) {
     warns[wUser.id].warns.forEach(e => {
@@ -18,13 +23,13 @@ module.exports.run = async (bot, message, args) => {
     });
   }
   else {
-    message.author.send(`<@${wUser.id}> hat keine Warnungen`);
+    message.author.send(`<@${wUser.id}> hat keine Meldungen`);
   }
   //
 
 }
 
 module.exports.help = {
-  name: "showwarns",
-  description: "Zeigt die hinterlegten Warnungen des Benutzers | showwarns @Benutzer"
+  name: "showreports",
+  description: "Zeigt die hinterlegten Warnungen des Benutzers | showreports @Benutzer"
 }

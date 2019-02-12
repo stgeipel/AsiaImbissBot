@@ -7,6 +7,8 @@ const config = JSON.parse(fs.readFileSync("config.json", "utf8"));
 var bot = new Discord.Client();
 bot.commands = new Discord.Collection();
 
+var mongoose = require('mongoose')
+
 fs.readdir("./commands", (err, files) => {
   if (err) console.log(err);
   let jsfile = files.filter(f => f.split(".").pop() === "js");
@@ -25,6 +27,13 @@ fs.readdir("./commands", (err, files) => {
 
 bot.on("ready", () => {
   console.log(`Logged in as ${bot.user.tag}!`);
+
+  // try {
+  //   mongoose.connect("mongodb://localhost/" + bot.guil)
+  // } catch (error) {
+  //   console.log(error)
+  // }
+
 });
 
 bot.on("message", async msg => {
@@ -60,4 +69,5 @@ bot.on("guildMemberUpdate", (mold, mnew) => {
 bot.login(config.token);
 
 module.exports.bot = bot;
+module.exports.mongoose = mongoose;
 
