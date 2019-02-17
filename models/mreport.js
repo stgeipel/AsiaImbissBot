@@ -8,7 +8,7 @@ const reportSchema = mongoose.Schema({
     rUsername: String,
     rUserId: String,
     time: String,
-
+    serverId: String
 })
 
 module.exports = mongoose.model("Report", reportSchema);

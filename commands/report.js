@@ -12,7 +12,7 @@ module.exports.run = async (bot, message, args) => {
   mongoose.connect("mongodb://localhost/soe", { useNewUrlParser: true })
   //if(!wUser) return message.reply("Couldn't find them yo");
   //if(wUser.hasPermission("MANAGE_MESSAGES")) return message.reply("They waaaay too kewl");
-   let reason = args.join(" ").slice(22);
+  let reason = args.join(" ").slice(22);
 
   // if(!warns[wUser.id]) warns[wUser.id] = {
   //   warns: []
@@ -25,20 +25,21 @@ module.exports.run = async (bot, message, args) => {
     reason: reason,
     rUsername: message.author.username,
     rUserId: message.author.id,
-    time: message.createdAt
+    time: message.createdAt,
+    serverId: message.guild.id
   })
 
   let count = 0;
 
   report.save()
-    .then(r =>{
-      Report.countDocuments({userId: wUser.user.id}, function(e, c) { 
+    .then(r => {
+      Report.countDocuments({ userId: wUser.user.id, serverId: message.guild.id }, function (e, c) {
         count = c
       })
     })
     .catch(err => console.log(err))
 
-    
+
 
   let warnEmbed = new Discord.RichEmbed()
     .setDescription("Meldung")
@@ -55,8 +56,23 @@ module.exports.run = async (bot, message, args) => {
   //   if (err) console.log(err)
   // });
 
-   let warnchannel = message.guild.channels.find(x => x.name ==  "incidents");
-   if(!warnchannel) return message.reply("Couldn't find channel");
+  let warnchannel = message.guild.channels.find(x => x.name == "Reports");
+
+  if (!warnchannel) {
+    message.channel.send("Es ist kein Report Channel vorhanden. Soll ich diesen für dich erstellen?")
+      .then(nm => {
+        nm.react(":thumbsup:")
+        nm.react(":thumbsdown:")
+
+        const filter = (reaction, user) => reaction.emoji.name === ':thumbsup:'
+        nm.awaitReactions(filter, { time: 15000 })
+          .then(collected => {
+            console.log(`Collected ${collected.size} reactions`)
+          })
+          .catch(console.error);
+      })
+
+  }
 
   warnchannel.send(warnEmbed);
 

@@ -12,7 +12,14 @@ module.exports.run = async (bot, message, args) => {
   Report.find({userId: wUser.user.id}, function(err, reports){
     if(reports.length > 0){
       reports.forEach(r => {
-        
+        let warnEmbed = new Discord.RichEmbed()
+        .setDescription("Meldung")
+        .setColor("#fc6400")
+        .addField("Melung ausgesprochen von", `<@${r.userId}>`)
+        .addField("Melung ausgesprochen gegen", `<@${r.rUserId}>`)
+        //.addField("wurde gemeldet in", message.channel)
+        //.addField("Anzah der Meldungen", count)
+        .addField("Grund", r.reason);
       })
     }
   })
