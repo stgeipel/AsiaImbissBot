@@ -13,7 +13,7 @@ module.exports.run = async (bot, message, args) => {
   //if(!wUser) return message.reply("Couldn't find them yo");
   //if(wUser.hasPermission("MANAGE_MESSAGES")) return message.reply("They waaaay too kewl");
   let reason = args.join(" ").slice(22);
-
+  if (reason === "") return message.reply("Es wurde kein Grund angegben. Bitte geben Sie einen Grund an.").then(msg => msg.delete(3000));
   // if(!warns[wUser.id]) warns[wUser.id] = {
   //   warns: []
   // };
@@ -39,8 +39,6 @@ module.exports.run = async (bot, message, args) => {
     })
     .catch(err => console.log(err))
 
-
-
   let warnEmbed = new Discord.RichEmbed()
     .setDescription("Meldung")
     .setAuthor(message.author.username)
@@ -61,20 +59,22 @@ module.exports.run = async (bot, message, args) => {
   if (!warnchannel) {
     message.channel.send("Es ist kein Report Channel vorhanden. Soll ich diesen für dich erstellen?")
       .then(nm => {
-        nm.react(":thumbsup:")
-        nm.react(":thumbsdown:")
+        nm.react('👍')
+        nm.react('👎')
 
-        const filter = (reaction, user) => reaction.emoji.name === ':thumbsup:'
-        nm.awaitReactions(filter, { time: 15000 })
-          .then(collected => {
-            console.log(`Collected ${collected.size} reactions`)
-          })
-          .catch(console.error);
+        // Create a reaction collector
+        const filter = (reaction, user) => reaction.emoji.name === '👌' && user.id === 'someID'
+        const collector = message.createReactionCollector(filter, { time: 15000 });
+        collector.on('collect', r => console.log(`Collected ${r.emoji.name}`));
+        collector.on('end', collected => console.log(`Collected ${collected.size} items`));
+
       })
-
+  }
+  else {
+    warnchannel.send(warnEmbed);
   }
 
-  warnchannel.send(warnEmbed);
+
 
   // if(warns[wUser.id].warns == 2){
   //   let muterole = message.guild.roles.find(`name`, "muted");
