@@ -1,6 +1,7 @@
 const Discord = require("discord.js");
 const fs = require("fs");
 const Embeds = require("./embed");
+const api = require("./public/backend/server")
 const gMemUpdate = require("./events/guildMemberUpdate");
 
 const config = JSON.parse(fs.readFileSync("config.json", "utf8"));
@@ -27,7 +28,7 @@ fs.readdir("./commands", (err, files) => {
 
 bot.on("ready", () => {
   console.log(`Logged in as ${bot.user.tag}!`);
-
+  api.runAPI();
   // try {
   //   mongoose.connect("mongodb://localhost/" + bot.guil)
   // } catch (error) {
