@@ -1,10 +1,10 @@
 
 
-export async function run(bot, msg, args) {
+module.exports.run = async (bot, msg, args) =>  {
 
 }
 
-export const help = {
+ module.exports.help = {
     name: "open",
     description: ""
 }

@@ -1,14 +1,17 @@
 const Discord = require("discord.js");
 const fs = require("fs");
 const Embeds = require("./embed");
-const api = require("./public/server")
+const websocket = require('./WebSocket/websocket')
 const gMemUpdate = require("./events/guildMemberUpdate");
 
 const config = JSON.parse(fs.readFileSync("config.json", "utf8"));
 var bot = new Discord.Client();
+var mongoose = require('mongoose')
+var ws = new websocket('123', 3000, bot)
+
 bot.commands = new Discord.Collection();
 
-var mongoose = require('mongoose')
+
 
 fs.readdir("./commands", (err, files) => {
   if (err) console.log(err);
@@ -28,7 +31,7 @@ fs.readdir("./commands", (err, files) => {
 
 bot.on("ready", () => {
   console.log(`Logged in as ${bot.user.tag}!`);
-  api.runAPI();
+
   // try {
   //   mongoose.connect("mongodb://localhost/" + bot.guil)
   // } catch (error) {
@@ -50,9 +53,9 @@ bot.on("message", async msg => {
       cont.startsWith(config.prefix)
     ) {
       var invoke = cont
-          .split(" ")[0]
-          .substr(config.prefix.length)
-          .toLowerCase(),
+        .split(" ")[0]
+        .substr(config.prefix.length)
+        .toLowerCase(),
         args = cont.split(" ").slice(1);
 
       // if (args.length == 0) Embeds.error(msg, 'Es wurde keine Argumente zu diesem Befehl angegeben')
