@@ -9,4 +9,4 @@ const adminSchema = mongoose.Schema({
     addedAt: String
 })
 
-module.exports = mongoose.Model("Admin",adminSchema)
+module.exports = mongoose.model("Admin",adminSchema)

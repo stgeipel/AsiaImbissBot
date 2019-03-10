@@ -1,7 +1,7 @@
 const Discord = require("discord.js");
 const fs = require("fs");
 const Embeds = require("./embed");
-const api = require("./public/backend/server")
+const api = require("./public/server")
 const gMemUpdate = require("./events/guildMemberUpdate");
 
 const config = JSON.parse(fs.readFileSync("config.json", "utf8"));
