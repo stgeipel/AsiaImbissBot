@@ -1,1 +1,26 @@
-{"445541065039282187":{"warns":[{"description":"Warnung","color":16540672,"author":{"name":"Noc"},"fields":[{"name":"Verwarnung ausgesprochen gegen","value":"<@445541065039282187>","inline":false},{"name":"wurde gewarnt in","value":"<#530759957029847050>","inline":false},{"name":"Anzah der Warnungen","value":"1","inline":false},{"name":"Grund","value":"wegen pimmel","inline":false}],"files":[]}]}}
+{
+  "445541065039282187": {
+    "warns": [
+      {
+        "description": "Warnung",
+        "color": 16540672,
+        "author": { "name": "Noc" },
+        "fields": [
+          {
+            "name": "Verwarnung ausgesprochen gegen",
+            "value": "<@445541065039282187>",
+            "inline": false
+          },
+          {
+            "name": "wurde gewarnt in",
+            "value": "<#530759957029847050>",
+            "inline": false
+          },
+          { "name": "Anzah der Warnungen", "value": "1", "inline": false },
+          { "name": "Grund", "value": "wegen pimmel", "inline": false }
+        ],
+        "files": []
+      }
+    ]
+  }
+}
