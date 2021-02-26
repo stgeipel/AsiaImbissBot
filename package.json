@@ -1,11 +1,12 @@
 {
-  "name": "SoEBot",
+  "name": "AsiaImbissBot",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "node index.js debug",
-    "start": "node index.js"
+    "start": "node index.js",
+    "dev": "nodemon ./src/bot.js"
   },
   "author": "",
   "license": "ISC",
