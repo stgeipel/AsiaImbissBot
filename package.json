@@ -16,7 +16,7 @@
     "cookie-parser": "^1.4.4",
     "discord.js": "^11.4.2",
     "express": "^4.16.4",
-    "express-handlebars": "^3.0.2",
+    "express-handlebars": "^5.2.1",
     "gulp": "^4.0.0",
     "hbs": "^4.0.3",
     "mongoose": "^5.4.19",
